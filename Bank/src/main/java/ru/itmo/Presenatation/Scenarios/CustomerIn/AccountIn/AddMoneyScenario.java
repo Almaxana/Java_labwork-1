@@ -20,7 +20,7 @@ public class AddMoneyScenario implements IScenario {
         System.out.println("\nEnter sum");
         int sum = in.nextInt();
 
-        accountService.
+        accountService.AddMoney(currentStateManager.CurrentAccount.Id, sum);
 
     }
 
