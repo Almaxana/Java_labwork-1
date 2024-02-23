@@ -7,8 +7,9 @@ import ru.itmo.Presenatation.Scenarios.IScenario;
 
 import java.util.Scanner;
 
+
 @AllArgsConstructor
-public class AddMoneyScenario implements IScenario {
+public class GetMoneyScenario implements IScenario {
     CurrentStateManager currentStateManager;
     AccountService accountService;
     @Override
@@ -18,12 +19,12 @@ public class AddMoneyScenario implements IScenario {
         System.out.println("\nEnter sum");
         int sum = in.nextInt();
 
-        accountService.AddMoney(currentStateManager.CurrentAccount.Id, sum);
-
+        if (accountService.GetMoney(currentStateManager.CurrentAccount.Id, currentStateManager.CustomerInSystem, sum)) System.out.println("\nSUCCESS\n");
+        else System.out.println("\nFAILURE\n");
     }
 
     @Override
     public String GetName() {
-        return "Add money";
+        return "Get money";
     }
 }

@@ -1,11 +1,12 @@
-package ru.itmo.Presenatation.ScenarioProvaiders;
+package ru.itmo.Presenatation.ScenarioProvaiders.CustomerIn;
 
 import ru.itmo.Core.Common.CurrentStateManager;
 import ru.itmo.Core.Services.ICustomerService;
+import ru.itmo.Presenatation.ScenarioProvaiders.IScenarioProvider;
 import ru.itmo.Presenatation.Scenarios.CustomerIn.CustomerLogoutScenario;
 import ru.itmo.Presenatation.Scenarios.IScenario;
 
-public class CustomerLogoutScenarioProvider implements IScenarioProvider{
+public class CustomerLogoutScenarioProvider implements IScenarioProvider {
     public CurrentStateManager currentStateManager;
     public ICustomerService customerService;
 

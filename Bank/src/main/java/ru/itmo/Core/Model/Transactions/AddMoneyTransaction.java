@@ -9,8 +9,9 @@ public class AddMoneyTransaction extends Transaction{
     }
     public Account account;
     @Override
-    public void Execute() {
+    public boolean Execute() {
         account.CurrentSum += sum;
+        return true;
     }
 
     @Override

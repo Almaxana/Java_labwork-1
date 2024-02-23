@@ -7,6 +7,7 @@ import ru.itmo.Core.Model.Accounts.Credit;
 import ru.itmo.Core.Model.Accounts.Debet;
 import ru.itmo.Core.Model.Accounts.Deposit;
 import ru.itmo.Core.Model.Bank;
+import ru.itmo.Core.Model.Customer;
 import ru.itmo.Core.Repositories.IAccountRepository;
 import ru.itmo.Core.Repositories.IBankRepository;
 
@@ -41,5 +42,12 @@ public class AccountService {
 
     public void AddMoney(UUID accountId, int sum){
         accountRepository.AddMoney(accountId, sum);
+    }
+    public boolean GetMoney(UUID accountId, Customer customer, int sum){
+        return accountRepository.GetMoney(accountId, customer, sum);
+    }
+
+    public  boolean MoveMoney(UUID accountFrom, String stringIdAccountTo, Customer customer, int sum){
+        return accountRepository.MoveMoney(accountFrom, stringIdAccountTo, customer, sum);
     }
 }

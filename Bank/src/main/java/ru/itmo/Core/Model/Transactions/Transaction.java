@@ -7,6 +7,6 @@ public abstract class Transaction {
     }
     public int sum;
     boolean Canceled = false;
-    public abstract void Execute();
+    public abstract boolean Execute();
     public abstract void Undo();
 }
