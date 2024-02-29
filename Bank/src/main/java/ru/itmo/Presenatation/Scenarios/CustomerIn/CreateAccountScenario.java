@@ -23,6 +23,8 @@ public class CreateAccountScenario implements IScenario {
         System.out.println("\nEnter start sum");
         int currentSum = in.nextInt();
 
+
+
         String accountType = in.nextLine();
         System.out.println("\nType kind of account: Debet  OR   Credit  OR  Deposit");
         accountType = in.nextLine();
@@ -33,7 +35,9 @@ public class CreateAccountScenario implements IScenario {
                 else System.out.println("\nFAILURE");
                 break;
             case ("Deposit"):
-                if (accountService.CreateDepositAccount(accountId, currentSum, bankName)) System.out.println("\nSUCCESS   Your account is" + accountId);
+                System.out.println("\nEnter len");
+                int length = in.nextInt();
+                if (accountService.CreateDepositAccount(accountId, currentSum, bankName, length)) System.out.println("\nSUCCESS   Your account is" + accountId);
                 else System.out.println("\nFAILURE");
                 break;
             case ("Credit"):

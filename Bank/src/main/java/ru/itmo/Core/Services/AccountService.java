@@ -27,13 +27,13 @@ public class AccountService {
     public boolean CreateCreditAccount(UUID accountId, int currentSum, String bankName){
         Bank bank = bankRepository.GetBankByName(bankName);
         if (bank == null) return false;
-        return accountRepository.AddAccount(new Credit(accountId, currentSum, bank.CreditMaxNegativeSum, currentStateManager.CustomerInSystem.Id, bank.Id));
+        return accountRepository.AddAccount(new Credit(accountId, currentSum, bank.CreditMaxNegativeSum, currentStateManager.CustomerInSystem.Id, bank.Id, bank.Commission));
     }
 
-    public boolean CreateDepositAccount(UUID accountId, int currentSum, String bankName){
+    public boolean CreateDepositAccount(UUID accountId, int currentSum, String bankName, int length){
         Bank bank = bankRepository.GetBankByName(bankName);
         if (bank == null) return false;
-        return accountRepository.AddAccount(new Deposit(accountId, currentSum, currentSum, bank.DepositLength, currentStateManager.CustomerInSystem.Id, bank.Id));
+        return accountRepository.AddAccount(new Deposit(accountId, currentSum, currentSum, length, currentStateManager.CustomerInSystem.Id, bank.Id, bank.CountDepositPercent(currentSum)));
     }
 
     public List<Account> GetAccountsByCustomerId(UUID customerId){
@@ -49,5 +49,9 @@ public class AccountService {
 
     public  boolean MoveMoney(UUID accountFrom, String stringIdAccountTo, Customer customer, int sum){
         return accountRepository.MoveMoney(accountFrom, stringIdAccountTo, customer, sum);
+    }
+
+    public float CountBalanceOverPeriod(Account account, int days){
+        return account.CountBalanceOverPeriod(days, currentStateManager.CurrentData);
     }
 }

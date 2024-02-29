@@ -19,10 +19,7 @@ import ru.itmo.DataAccess.BanksRepository;
 import ru.itmo.DataAccess.CustomerRepository;
 import ru.itmo.DataAccess.TransactionRepository;
 import ru.itmo.Presenatation.ScenarioProvaiders.*;
-import ru.itmo.Presenatation.ScenarioProvaiders.CustomerIn.AccountIn.AddMoneyScenarioProvider;
-import ru.itmo.Presenatation.ScenarioProvaiders.CustomerIn.AccountIn.GetMoneyScenarioProvider;
-import ru.itmo.Presenatation.ScenarioProvaiders.CustomerIn.AccountIn.MoveMoneyScenarioProvider;
-import ru.itmo.Presenatation.ScenarioProvaiders.CustomerIn.AccountIn.ShowCurrentBalanceScenarioProvider;
+import ru.itmo.Presenatation.ScenarioProvaiders.CustomerIn.AccountIn.*;
 import ru.itmo.Presenatation.ScenarioProvaiders.CustomerIn.CreateAccountScenarioProvider;
 import ru.itmo.Presenatation.ScenarioProvaiders.CustomerIn.CustomerLogoutScenarioProvider;
 import ru.itmo.Presenatation.ScenarioProvaiders.CustomerIn.SelectAccountScenarioProvider;
@@ -54,13 +51,14 @@ public class Main {
         providers.add(new GetMoneyScenarioProvider(currentStateManager, new AccountService(accountRepository, bankRepository, currentStateManager)));
         providers.add(new MoveMoneyScenarioProvider(currentStateManager, new AccountService(accountRepository, bankRepository, currentStateManager)));
         providers.add(new ShowCurrentBalanceScenarioProvider(currentStateManager));
+        providers.add(new ShowBalanceOverPeriodScenarioProvider(new AccountService(accountRepository, bankRepository, currentStateManager), currentStateManager));
 
 
-        Customer user = new Customer("Ks", "Al", "asdgasg", "sdgasgd", UUID.randomUUID());
-        Bank bank = new Bank("Sber", UUID.randomUUID(), 1, 1, 1, 1, 1);
-        Debet debet = new Debet(UUID.randomUUID(), 30, 20, user.Id, bank.Id);
-        Deposit deposit = new Deposit(UUID.randomUUID(), 10, 20, 0, user.Id, bank.Id);
-        Credit credit = new Credit(UUID.randomUUID(), 20, 1, user.Id, bank.Id);
+        Customer user = new Customer("Ks", "Al", "SKIP", "SKIP", UUID.randomUUID());
+        Bank bank = new Bank("Sber", UUID.randomUUID(), 12, 1, 1, 1, 1);
+        Debet debet = new Debet(UUID.randomUUID(), 30000, 20, user.Id, bank.Id);
+        Deposit deposit = new Deposit(UUID.randomUUID(), 10000, 20000, 90, user.Id, bank.Id, 15);
+        Credit credit = new Credit(UUID.randomUUID(), 20000, 50000, user.Id, bank.Id, 20);
 
         accountRepository.AddAccount(deposit);
         accountRepository.AddAccount(debet);
@@ -69,9 +67,8 @@ public class Main {
         customerRepository.AddCustomer(user);
 
         currentStateManager.CustomerInSystem = user;
-        /*currentStateManager.CurrentAccount = deposit;*/
+        currentStateManager.CurrentAccount = deposit;
         deposit.dateOfStart = currentStateManager.CurrentData.minusDays(10);
-
         ScenarioRunner scenarioRunner = new ScenarioRunner(providers);
         while (true){
             scenarioRunner.Run();

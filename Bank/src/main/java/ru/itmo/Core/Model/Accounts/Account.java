@@ -19,4 +19,6 @@ public abstract class Account {
     public UUID CustomerId;
     public UUID BankId;
     public DateTime dateOfStart;
+    public abstract float CountBalanceOverPeriod(int days, DateTime currentData);
+
 }

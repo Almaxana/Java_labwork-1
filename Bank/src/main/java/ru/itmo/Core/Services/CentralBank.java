@@ -9,8 +9,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CentralBank {
     IBankRepository bankRepository;
-    public boolean CreateBank(String name,  int maxDoubtSum, int depositLength, int commission, int fixedDebetPercent, UUID id, int creditMaxNegativeSum) {
-        return bankRepository.AddBank(new Bank(name, id, fixedDebetPercent, depositLength, commission, creditMaxNegativeSum, maxDoubtSum));
+    public boolean CreateBank(String name,  int maxDoubtSum, int commission, int fixedDebetPercent, UUID id, int creditMaxNegativeSum, int depositPercentBorder) {
+        return bankRepository.AddBank(new Bank(name, id, fixedDebetPercent, commission, creditMaxNegativeSum, maxDoubtSum, depositPercentBorder));
     }
 
 

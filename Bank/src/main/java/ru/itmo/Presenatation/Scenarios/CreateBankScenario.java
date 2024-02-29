@@ -30,12 +30,13 @@ public class CreateBankScenario implements IScenario{
         System.out.println("\nEnter credit max negative sum");
         int creditMaxNegativeSum = in.nextInt();
 
-        System.out.println("\nEnter deposit length");
-        int depositLength = in.nextInt();
+
+        System.out.println("\nEnter deposit percent border");
+        int depositPercentBorder = in.nextInt();
 
         UUID id = UUID.randomUUID();
 
-        if (centralBank.CreateBank(Name, maxDoubtSum, depositLength, commission, debetPercent, id, creditMaxNegativeSum)) System.out.println("\nSUCCESS\n");
+        if (centralBank.CreateBank(Name, maxDoubtSum, commission, debetPercent, id, creditMaxNegativeSum, depositPercentBorder)) System.out.println("\nSUCCESS\n");
         else System.out.println("\nERROR    Customer isn't created\n");
     }
 
