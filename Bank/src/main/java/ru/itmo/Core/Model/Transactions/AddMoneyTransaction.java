@@ -16,6 +16,10 @@ public class AddMoneyTransaction extends Transaction{
 
     @Override
     public void Undo() {
-        account.CurrentSum -= sum;
+        if (!Canceled) {
+            account.CurrentSum -= sum;
+            Canceled = true;
+        }
+
     }
 }

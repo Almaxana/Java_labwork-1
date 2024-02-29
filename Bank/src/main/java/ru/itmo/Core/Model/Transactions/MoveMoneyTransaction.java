@@ -52,7 +52,9 @@ public class MoveMoneyTransaction extends Transaction{
 
     @Override
     public void Undo() {
+        if (Canceled) return;
         FromAccount.CurrentSum += sum;
         ToAccount.CurrentSum -= sum;
+        Canceled=true;
     }
 }

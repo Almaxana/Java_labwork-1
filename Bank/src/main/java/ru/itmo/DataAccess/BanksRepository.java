@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class BanksRepository implements IBankRepository {
     private ArrayList<Bank> banks;
     public BanksRepository(){
-        banks = new ArrayList<Bank>();
+        banks = new ArrayList<>();
     }
     @Override
     public Bank GetBankByName(String name) {
